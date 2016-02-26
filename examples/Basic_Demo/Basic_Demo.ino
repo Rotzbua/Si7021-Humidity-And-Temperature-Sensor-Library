@@ -35,33 +35,33 @@ SI7021 si7021;
 
 void setup()
 {
-Serial.begin(115200);
-si7021.begin(); // Runs : Wire.begin() + reset()
-  while(!Serial); // Wait for serial monitor to open
-Serial.println("BASIC DEMO");
-Serial.println("------------------------------------------");
-si7021.setHumidityRes(12); // Humidity = 12-bit / Temperature = 14-bit
+  Serial.begin(115200);
+  si7021.begin(); // Runs : Wire.begin() + reset()
+  while (!Serial); // Wait for serial monitor to open
+  Serial.println("BASIC DEMO");
+  Serial.println("------------------------------------------");
+  si7021.setHumidityRes(12); // Humidity = 12-bit / Temperature = 14-bit
 }
 
 void loop()
 {
-static uint8_t heaterOnOff; // Create static variable for heater control
-si7021.setHeater(heaterOnOff); // Turn heater on or off
-Serial.print("Heater Status = ");
-Serial.println(si7021.getHeater() ? "ON" : "OFF");
+  static uint8_t heaterOnOff; // Create static variable for heater control
+  si7021.setHeater(heaterOnOff); // Turn heater on or off
+  Serial.print("Heater Status = ");
+  Serial.println(si7021.getHeater() ? "ON" : "OFF");
 
-  for(int i = (heaterOnOff ? 20 : 30); i>0; i--)
+  for (int i = (heaterOnOff ? 20 : 30); i > 0; i--)
   {
-  Serial.print("Humidity : ");
-  Serial.print(si7021.readHumidity()); // Read humidity and print to serial monitor
-  Serial.print(" %\t");
-  Serial.print("Temp : ");
-  Serial.print(si7021.readTemp()); // Read temperature and print to serial monitor
-  Serial.print(" C\t");
-  Serial.println(i); // Print count down for heater change
-  delay(500);
+    Serial.print("Humidity : ");
+    Serial.print(si7021.readHumidity()); // Read humidity and print to serial monitor
+    Serial.print(" %\t");
+    Serial.print("Temp : ");
+    Serial.print(si7021.readTemp()); // Read temperature and print to serial monitor
+    Serial.print(" C\t");
+    Serial.println(i); // Print count down for heater change
+    delay(500);
   }
 
-heaterOnOff = !heaterOnOff; // Toggle heater on/off variable
+  heaterOnOff = !heaterOnOff; // Toggle heater on/off variable
 }
 
